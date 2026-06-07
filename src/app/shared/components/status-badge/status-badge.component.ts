@@ -39,14 +39,14 @@ const STATUS_ICONS: Record<MachineStatus, string> = {
       gap: 6px;
       padding: 4px 10px;
       border-radius: 4px;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       border: 1px solid transparent;
 
       i {
-        font-size: 13px;
+        font-size: 15px;
       }
     }
 

@@ -103,7 +103,7 @@ const COMMANDS: CommandConfig[] = [
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 600;
       color: var(--color-text-primary);
       margin-bottom: 16px;
@@ -125,7 +125,7 @@ const COMMANDS: CommandConfig[] = [
       min-height: 80px;
       border-radius: 6px;
       border: 2px solid transparent;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -133,7 +133,7 @@ const COMMANDS: CommandConfig[] = [
       transition: opacity 150ms ease, transform 100ms ease, box-shadow 150ms ease;
 
       i {
-        font-size: 20px;
+        font-size: 22px;
       }
 
       &:disabled {
@@ -179,7 +179,7 @@ const COMMANDS: CommandConfig[] = [
       flex-direction: row;
 
       i {
-        font-size: 18px;
+        font-size: 20px;
       }
     }
 
@@ -188,7 +188,7 @@ const COMMANDS: CommandConfig[] = [
       align-items: center;
       gap: 6px;
       margin-top: 12px;
-      font-size: 12px;
+      font-size: 14px;
       color: var(--color-text-secondary);
     }
   `],

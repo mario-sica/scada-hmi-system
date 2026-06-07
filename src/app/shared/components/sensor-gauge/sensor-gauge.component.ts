@@ -58,7 +58,7 @@ import { ThresholdLevel, getSensorThresholdLevel, SensorKey } from '../../../cor
     }
 
     .sensor-gauge__label {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -101,7 +101,7 @@ import { ThresholdLevel, getSensorThresholdLevel, SensorKey } from '../../../cor
       display: flex;
       align-items: center;
       gap: 4px;
-      font-size: 12px;
+      font-size: 14px;
     }
 
     .sensor-gauge--normal .sensor-gauge__status {

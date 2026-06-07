@@ -75,20 +75,20 @@ import { ThemeService } from './core/services/theme.service';
       gap: 10px;
 
       i {
-        font-size: 18px;
+        font-size: 20px;
         color: var(--color-border-focus);
       }
     }
 
     .app-navbar__title {
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 700;
       color: var(--color-text-primary);
       letter-spacing: 0.02em;
     }
 
     .app-navbar__version {
-      font-size: 11px;
+      font-size: 13px;
       color: var(--color-text-secondary);
       background: var(--color-bg-elevated);
       border: 1px solid var(--color-border);
@@ -114,7 +114,7 @@ import { ThemeService } from './core/services/theme.service';
       border-radius: 6px;
       cursor: pointer;
       color: var(--color-text-primary);
-      font-size: 16px;
+      font-size: 18px;
       transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
 
       &:hover {

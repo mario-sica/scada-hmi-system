@@ -54,7 +54,7 @@ import { Alarm } from '../../../core/models/alarm.model';
       gap: 6px;
       padding: 4px 12px;
       border-radius: 4px;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 500;
       border: 1px solid transparent;
     }

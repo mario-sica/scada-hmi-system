@@ -112,7 +112,7 @@ import { getSensorThresholdLevel } from '../../../core/constants/thresholds';
 
     .machine-card__id {
       font-family: var(--font-mono, 'Roboto Mono', monospace);
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
       color: var(--color-text-secondary);
       background: var(--color-bg-elevated);
@@ -122,7 +122,7 @@ import { getSensorThresholdLevel } from '../../../core/constants/thresholds';
     }
 
     .machine-card__name {
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 600;
       color: var(--color-text-primary);
       line-height: 1.3;
@@ -144,7 +144,7 @@ import { getSensorThresholdLevel } from '../../../core/constants/thresholds';
     }
 
     .machine-card__sensor-label {
-      font-size: 11px;
+      font-size: 13px;
       color: var(--color-text-secondary);
       text-transform: uppercase;
       font-weight: 600;
@@ -154,7 +154,7 @@ import { getSensorThresholdLevel } from '../../../core/constants/thresholds';
 
     .machine-card__sensor-value {
       font-family: 'Roboto Mono', monospace;
-      font-size: 15px;
+      font-size: 17px;
       font-weight: 500;
     }
 
@@ -167,7 +167,7 @@ import { getSensorThresholdLevel } from '../../../core/constants/thresholds';
       align-items: center;
       gap: 8px;
       color: var(--color-text-secondary);
-      font-size: 13px;
+      font-size: 15px;
     }
 
     .machine-card__footer {
@@ -181,7 +181,7 @@ import { getSensorThresholdLevel } from '../../../core/constants/thresholds';
       display: flex;
       align-items: center;
       gap: 4px;
-      font-size: 11px;
+      font-size: 13px;
       color: var(--color-text-secondary);
     }
 

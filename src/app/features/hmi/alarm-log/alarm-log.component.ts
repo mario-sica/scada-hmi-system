@@ -113,7 +113,7 @@ const SEVERITY_LABELS: Record<AlarmSeverity, string> = {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 600;
       color: var(--color-text-primary);
     }
@@ -127,7 +127,7 @@ const SEVERITY_LABELS: Record<AlarmSeverity, string> = {
     .alarm-count {
       padding: 3px 10px;
       border-radius: 4px;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 600;
     }
 
@@ -149,7 +149,7 @@ const SEVERITY_LABELS: Record<AlarmSeverity, string> = {
       gap: 8px;
       color: var(--color-sensor-normal);
       padding: 24px 0;
-      font-size: 14px;
+      font-size: 16px;
     }
 
     .severity-badge {
@@ -158,7 +158,7 @@ const SEVERITY_LABELS: Record<AlarmSeverity, string> = {
       gap: 5px;
       padding: 3px 8px;
       border-radius: 4px;
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: 0.04em;
       border: 1px solid transparent;
@@ -183,13 +183,13 @@ const SEVERITY_LABELS: Record<AlarmSeverity, string> = {
     }
 
     .alarm-message {
-      font-size: 13px;
+      font-size: 15px;
       color: var(--color-text-primary);
     }
 
     .alarm-timestamp {
       font-family: 'Roboto Mono', monospace;
-      font-size: 12px;
+      font-size: 14px;
       color: var(--color-text-secondary);
     }
 
@@ -210,7 +210,7 @@ const SEVERITY_LABELS: Record<AlarmSeverity, string> = {
       background: var(--color-bg-elevated);
       border: 1px solid var(--color-border);
       border-radius: 4px;
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 600;
       color: var(--color-text-primary);
       cursor: pointer;
@@ -227,7 +227,7 @@ const SEVERITY_LABELS: Record<AlarmSeverity, string> = {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-size: 12px;
+      font-size: 14px;
       color: var(--color-sensor-normal);
     }
   `],

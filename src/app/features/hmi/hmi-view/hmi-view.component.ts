@@ -181,7 +181,7 @@ import { AlarmLogComponent } from '../alarm-log/alarm-log.component';
       border: 1px solid var(--color-border);
       border-radius: 6px;
       color: var(--color-text-primary);
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
       cursor: pointer;
       white-space: nowrap;
@@ -201,7 +201,7 @@ import { AlarmLogComponent } from '../alarm-log/alarm-log.component';
 
     .hmi-machine-id {
       font-family: 'Roboto Mono', monospace;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--color-text-secondary);
       background: var(--color-bg-elevated);
@@ -211,7 +211,7 @@ import { AlarmLogComponent } from '../alarm-log/alarm-log.component';
     }
 
     .hmi-machine-name {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--color-text-primary);
     }
@@ -220,7 +220,7 @@ import { AlarmLogComponent } from '../alarm-log/alarm-log.component';
       display: flex;
       align-items: center;
       gap: 5px;
-      font-size: 12px;
+      font-size: 14px;
       color: var(--color-text-secondary);
     }
 
@@ -230,7 +230,7 @@ import { AlarmLogComponent } from '../alarm-log/alarm-log.component';
       gap: 6px;
       padding: 6px 12px;
       border-radius: 4px;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 500;
       border: 1px solid transparent;
     }

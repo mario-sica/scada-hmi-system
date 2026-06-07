@@ -33,7 +33,7 @@
 // ─── InputText ───────────────────────────────────────────────────────────────
 .p-inputtext {
   min-height: 48px;
-  font-size: 16px;
+  font-size: 18px;
   font-family: 'Inter', sans-serif;
   padding: var(--p-form-field-padding-y) var(--p-form-field-padding-x);
 }
@@ -45,7 +45,7 @@
 
 // ─── DataTable ───────────────────────────────────────────────────────────────
 .p-datatable .p-datatable-thead > tr > th {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 600;
@@ -56,6 +56,6 @@
 
 // ─── Tooltip ─────────────────────────────────────────────────────────────────
 .p-tooltip .p-tooltip-text {
-  font-size: 13px;
+  font-size: 15px;
   font-family: 'Inter', sans-serif;
 }

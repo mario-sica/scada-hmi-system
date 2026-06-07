@@ -75,7 +75,7 @@ import { SensorGaugeComponent } from '../../../shared/components/sensor-gauge/se
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 600;
       color: var(--color-text-primary);
       margin-bottom: 16px;
@@ -92,7 +92,7 @@ import { SensorGaugeComponent } from '../../../shared/components/sensor-gauge/se
       align-items: center;
       gap: 6px;
       margin-top: 12px;
-      font-size: 12px;
+      font-size: 14px;
       color: var(--color-text-secondary);
     }
 

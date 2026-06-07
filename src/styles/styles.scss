@@ -26,7 +26,7 @@ html, body {
 body {
   height: 100%;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   background-color: var(--color-bg-base);
@@ -54,20 +54,20 @@ app-root {
 
 .value-numeric {
   font-family: 'Roboto Mono', monospace;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   letter-spacing: 0.02em;
 }
 
 .value-numeric-sm {
   font-family: 'Roboto Mono', monospace;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
 }
 
 .label-unit {
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;

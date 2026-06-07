@@ -160,14 +160,14 @@ import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
       color: var(--color-text-primary);
       margin-bottom: 4px;
     }
 
     .scada-dashboard__subtitle {
-      font-size: 13px;
+      font-size: 15px;
       color: var(--color-text-secondary);
     }
 
@@ -177,7 +177,7 @@ import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
       gap: 6px;
       padding: 6px 12px;
       border-radius: 4px;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 500;
       border: 1px solid transparent;
     }
@@ -233,7 +233,7 @@ import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
 
     .machine-id-badge {
       font-family: 'Roboto Mono', monospace;
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 700;
       background: var(--color-bg-overlay);
       padding: 3px 10px;
@@ -254,7 +254,7 @@ import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
     }
 
     .access-dialog__label {
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 600;
       color: var(--color-text-secondary);
       text-transform: uppercase;
@@ -270,7 +270,7 @@ import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
       align-items: center;
       gap: 6px;
       color: var(--color-alarm-critical);
-      font-size: 13px;
+      font-size: 15px;
       font-weight: 500;
       padding: 8px 12px;
       background: color-mix(in srgb, var(--color-alarm-critical) 10%, transparent);

@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
+
+// Font families
+$font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+$font-mono: 'Roboto Mono', 'JetBrains Mono', 'Courier New', monospace;
+
+body {
+  font-family: $font-sans;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Classe helper per valori numerici di processo
+.value-numeric {
+  font-family: $font-mono;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.value-numeric-sm {
+  font-family: $font-mono;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.label-unit {
+  font-family: $font-sans;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

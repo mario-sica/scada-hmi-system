@@ -1,0 +1,76 @@
+// Entry point SCSS — importa tutto nell'ordine corretto
+@use 'themes/dark' as *;
+@use 'themes/light' as *;
+@use 'variables' as *;
+@use 'typography' as *;
+@use 'components' as *;
+
+// PrimeNG base styles
+@import 'primeng/resources/primeng.css';
+
+// Reset base
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  // Il tema dark è applicato via ThemeService sull'elemento html
+  // Default applicato qui per evitare FOUC prima del bootstrap Angular
+  background-color: #0d1117;
+}
+
+body {
+  height: 100%;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  transition: $theme-transition;
+}
+
+// Layout root
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// Utility classes
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.gap-sm {
+  gap: $space-sm;
+}
+
+.gap-md {
+  gap: $space-md;
+}
+
+.gap-lg {
+  gap: $space-lg;
+}

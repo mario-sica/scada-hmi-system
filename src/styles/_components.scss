@@ -1,0 +1,125 @@
+// Override globali PrimeNG — allineamento al design token industriale
+
+// Card
+.p-card {
+  background: var(--color-bg-surface) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 6px !important;
+  color: var(--color-text-primary) !important;
+
+  .p-card-title {
+    color: var(--color-text-primary) !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+  }
+}
+
+// Button — touch-friendly
+.p-button {
+  min-height: 48px !important;
+  min-width: 48px !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+}
+
+// Dialog
+.p-dialog {
+  background: var(--color-bg-elevated) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: 8px !important;
+
+  .p-dialog-header {
+    background: var(--color-bg-elevated) !important;
+    color: var(--color-text-primary) !important;
+    border-bottom: 1px solid var(--color-border) !important;
+    padding: 16px 20px !important;
+  }
+
+  .p-dialog-content {
+    background: var(--color-bg-elevated) !important;
+    color: var(--color-text-primary) !important;
+    padding: 20px !important;
+  }
+
+  .p-dialog-footer {
+    background: var(--color-bg-elevated) !important;
+    border-top: 1px solid var(--color-border) !important;
+    padding: 12px 20px !important;
+  }
+}
+
+// Table
+.p-datatable {
+  .p-datatable-thead > tr > th {
+    background: var(--color-bg-elevated) !important;
+    color: var(--color-text-secondary) !important;
+    border-color: var(--color-border) !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    padding: 10px 12px !important;
+  }
+
+  .p-datatable-tbody > tr {
+    background: var(--color-bg-surface) !important;
+    color: var(--color-text-primary) !important;
+
+    > td {
+      border-color: var(--color-border) !important;
+      padding: 10px 12px !important;
+    }
+
+    &:hover > td {
+      background: var(--color-bg-overlay) !important;
+    }
+  }
+}
+
+// Tag / Badge
+.p-tag {
+  border-radius: 4px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 3px 8px !important;
+}
+
+// Toast
+.p-toast {
+  .p-toast-message {
+    border-radius: 6px !important;
+    border: 1px solid var(--color-border) !important;
+  }
+}
+
+// InputText — touch-friendly
+.p-inputtext {
+  min-height: 48px !important;
+  font-size: 16px !important;
+  background: var(--color-bg-elevated) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-text-primary) !important;
+  border-radius: 6px !important;
+
+  &:focus {
+    border-color: var(--color-border-focus) !important;
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-border-focus) 20%, transparent) !important;
+  }
+}
+
+// ConfirmDialog
+.p-confirmdialog {
+  .p-confirmdialog-message {
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+  }
+}
+
+// Tooltip
+.p-tooltip .p-tooltip-text {
+  background: var(--color-bg-elevated) !important;
+  color: var(--color-text-primary) !important;
+  border: 1px solid var(--color-border) !important;
+  font-size: 13px !important;
+  border-radius: 4px !important;
+}

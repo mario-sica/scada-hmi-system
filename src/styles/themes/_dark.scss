@@ -1,0 +1,58 @@
+// Tema scuro — standard industriale per ambienti a bassa luminosità
+// Ottimizzato per schermi 24/7, riduce affaticamento visivo
+[data-theme="dark"] {
+  // Sfondi
+  --color-bg-base: #0d1117;
+  --color-bg-surface: #161b22;
+  --color-bg-elevated: #21262d;
+  --color-bg-overlay: #30363d;
+
+  // Testi
+  --color-text-primary: #e6edf3;
+  --color-text-secondary: #8b949e;
+  --color-text-disabled: #484f58;
+  --color-text-inverse: #0d1117;
+
+  // Bordi
+  --color-border: #30363d;
+  --color-border-focus: #58a6ff;
+
+  // Stato macchine (invarianti tra temi — significato semantico)
+  --color-status-running: #2ea043;
+  --color-status-stopped: #6e7681;
+  --color-status-fault: #da3633;
+  --color-status-maintenance: #d29922;
+
+  // Allarmi
+  --color-alarm-critical: #da3633;
+  --color-alarm-warning: #d29922;
+  --color-alarm-info: #58a6ff;
+
+  // Comandi
+  --color-cmd-start: #2ea043;
+  --color-cmd-stop: #d29922;
+  --color-cmd-reset: #58a6ff;
+  --color-cmd-emergency: #da3633;
+
+  // Sensori — soglie
+  --color-sensor-normal: #2ea043;
+  --color-sensor-warning: #d29922;
+  --color-sensor-critical: #da3633;
+
+  // Indicatore connessione
+  --color-connection-ok: #2ea043;
+  --color-connection-lost: #da3633;
+
+  // PrimeNG design token overrides
+  --p-surface-ground: #0d1117;
+  --p-surface-section: #161b22;
+  --p-surface-card: #161b22;
+  --p-surface-overlay: #21262d;
+  --p-surface-border: #30363d;
+  --p-text-color: #e6edf3;
+  --p-text-secondary-color: #8b949e;
+  --p-primary-color: #58a6ff;
+  --p-primary-contrast-color: #0d1117;
+  --p-content-border-color: #30363d;
+  --p-content-hover-background: #21262d;
+}

@@ -58,7 +58,7 @@ import { AlarmLogComponent } from '../alarm-log/alarm-log.component';
   ],
   providers: [MessageService],
   template: `
-    <p-toast position="top-right" />
+    <p-toast position="top-center" />
 
     <div class="hmi-view">
       <!-- Header HMI -->

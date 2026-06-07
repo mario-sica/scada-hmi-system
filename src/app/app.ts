@@ -18,7 +18,7 @@ import { ThemeService } from './core/services/theme.service';
   standalone: true,
   imports: [RouterOutlet, CommonModule, ToastModule, TooltipModule, ButtonModule],
   template: `
-    <p-toast position="top-right" [baseZIndex]="9999" />
+    <p-toast position="top-center" [baseZIndex]="9999" />
 
     <nav class="app-navbar" aria-label="Barra di navigazione principale">
       <div class="app-navbar__brand">

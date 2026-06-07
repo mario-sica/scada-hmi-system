@@ -22,7 +22,6 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           summary: 'Connessione persa',
           detail: 'Impossibile raggiungere il server. Verificare la connessione.',
           sticky: true,
-          key: 'network-error',
         });
       } else if (error.status === 404) {
         console.warn(`[ErrorInterceptor] 404 Not Found: ${req.url}`);

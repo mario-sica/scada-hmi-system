@@ -1,0 +1,40 @@
+// Variabili SCSS statiche — non cambiano tra i temi
+// I colori semantici sono in themes/_dark.scss e themes/_light.scss
+
+// Breakpoints (schermo industriale come target primario)
+$bp-industrial: 1280px;
+$bp-supervisor: 1920px;
+
+// Spacing scale
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 32px;
+$space-2xl: 48px;
+
+// Border radius — stile tecnico, non consumer
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 8px;
+
+// Touch target minimo (schermo touch industriale)
+$touch-target: 48px;
+
+// Font sizes
+$font-sm: 12px;
+$font-base: 14px;
+$font-md: 16px;
+$font-lg: 18px;
+$font-xl: 24px;
+$font-2xl: 32px;
+
+// Transizione tema (fluida ma non decorativa)
+$theme-transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+
+// Z-index scale
+$z-base: 1;
+$z-dropdown: 100;
+$z-overlay: 200;
+$z-modal: 300;
+$z-toast: 400;

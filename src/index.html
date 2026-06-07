@@ -1,11 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html lang="it" data-theme="dark">
 <head>
   <meta charset="utf-8">
-  <title>ScadaHmiSystem</title>
+  <title>SCADA HMI System</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1280">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- PrimeIcons -->
+  <link rel="stylesheet" href="https://unpkg.com/primeicons@7/primeicons.css">
+  <!-- Anti-FOUC: applica il tema salvato prima del render Angular -->
+  <script>
+    (function() {
+      var theme = localStorage.getItem('hmi-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
 <body>
   <app-root></app-root>

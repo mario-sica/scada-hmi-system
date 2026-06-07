@@ -6,10 +6,11 @@
  */
 
 export interface SensorData {
+  id: string;            // assegnato da JSON Server (es. "s1")
   machineId: string;
-  temperature: number;
-  pressure: number;
-  rpm: number;
-  vibration: number;
-  timestamp: string;
+  temperature: number;   // °C
+  pressure: number;      // bar
+  rpm: number;           // giri/min
+  vibration: number;     // mm/s
+  timestamp: string;     // ISO 8601
 }

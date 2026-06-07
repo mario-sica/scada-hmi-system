@@ -18,37 +18,25 @@
 
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, interval } from 'rxjs';
-import { switchMap, startWith } from 'rxjs/operators';
+import { Observable, interval, switchMap, startWith, map } from 'rxjs';
 import { Machine, MachineStatus } from '../models/machine.model';
 import { SensorData } from '../models/sensor-data.model';
 import { API_ENDPOINTS } from '../constants/api-endpoints';
+import { SensorSimulatorService } from './sensor-simulator.service';
 
 @Injectable({ providedIn: 'root' })
 export class MachineService {
-  private http = inject(HttpClient);
+  private http      = inject(HttpClient);
+  private simulator = inject(SensorSimulatorService);
 
-  /**
-   * @returns Observable array di tutte le macchine registrate nel sistema
-   */
   getMachines(): Observable<Machine[]> {
     return this.http.get<Machine[]>(API_ENDPOINTS.machines);
   }
 
-  /**
-   * @param id - ID della macchina (es. 'M1')
-   * @returns Observable con i dati della macchina richiesta
-   * @throws 404 se la macchina non esiste
-   */
   getMachineById(id: string): Observable<Machine> {
     return this.http.get<Machine>(API_ENDPOINTS.machine(id));
   }
 
-  /**
-   * @param id - ID della macchina
-   * @param status - Nuovo stato operativo
-   * @returns Observable con i dati macchina aggiornati
-   */
   updateMachineStatus(id: string, status: MachineStatus): Observable<Machine> {
     return this.http.patch<Machine>(API_ENDPOINTS.machine(id), {
       status,
@@ -58,43 +46,25 @@ export class MachineService {
 
   /**
    * Polling real-time dei dati sensore per una macchina.
-   * Usa interval(5000) + switchMap per simulare il ciclo di scansione PLC.
-   * startWith(0) fa partire la prima chiamata immediatamente senza aspettare 5s.
+   * I valori sono simulati tramite SensorSimulatorService che rispetta lo stato
+   * della macchina: se stopped/maintenance tutti i valori tornano a 0.
    *
    * @param machineId - ID della macchina da monitorare
-   * @returns Observable con i dati sensore aggiornati ogni 5 secondi
+   * @param getStatus - Callback che restituisce lo stato corrente della macchina
+   *                    (signal o funzione pura — evita dipendenza circolare tra servizi)
    */
-  pollSensorData(machineId: string): Observable<SensorData> {
+  pollSensorData(machineId: string, getStatus: () => MachineStatus): Observable<SensorData> {
     return interval(5000).pipe(
       startWith(0),
-      switchMap(() =>
-        this.http.get<SensorData[]>(API_ENDPOINTS.sensorByMachine(machineId))
-      ),
-      switchMap((sensors) => {
-        // Restituisce il primo sensore trovato per la macchina
-        const sensor = sensors[0];
-        // Simula variazione realistica dei valori ad ogni polling
-        const varied: SensorData = {
-          ...sensor,
-          temperature: +(sensor.temperature + (Math.random() - 0.5) * 2).toFixed(1),
-          pressure: +(sensor.pressure + (Math.random() - 0.5) * 0.2).toFixed(2),
-          rpm: Math.round(sensor.rpm + (Math.random() - 0.5) * 50),
-          vibration: +(sensor.vibration + (Math.random() - 0.5) * 0.3).toFixed(2),
-          timestamp: new Date().toISOString(),
-        };
-        return [varied];
-      })
+      switchMap(() => this.http.get<SensorData[]>(API_ENDPOINTS.sensorByMachine(machineId))),
+      map((sensors) => this.simulator.simulate(sensors[0], getStatus())),
     );
   }
 
-  /**
-   * Polling degli stati di tutte le macchine (usato dalla SCADA dashboard).
-   * @returns Observable con array macchine aggiornato ogni 5 secondi
-   */
   pollAllMachines(): Observable<Machine[]> {
     return interval(5000).pipe(
       startWith(0),
-      switchMap(() => this.getMachines())
+      switchMap(() => this.getMachines()),
     );
   }
 }

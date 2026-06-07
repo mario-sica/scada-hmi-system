@@ -31,6 +31,7 @@ import { PasswordModule } from 'primeng/password';
 import { MachineService } from '../../../core/services/machine.service';
 import { AlarmService } from '../../../core/services/alarm.service';
 import { AuthService } from '../../../core/services/auth.service';
+import { SensorSimulatorService } from '../../../core/services/sensor-simulator.service';
 import { Machine } from '../../../core/models/machine.model';
 import { SensorData } from '../../../core/models/sensor-data.model';
 import { Alarm } from '../../../core/models/alarm.model';
@@ -280,12 +281,13 @@ import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
 })
 export class ScadaDashboardComponent implements OnInit, OnDestroy {
   private machineService = inject(MachineService);
-  private alarmService = inject(AlarmService);
-  private authService = inject(AuthService);
-  private http = inject(HttpClient);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
-  private destroy$ = new Subject<void>();
+  private alarmService   = inject(AlarmService);
+  private authService    = inject(AuthService);
+  private simulator      = inject(SensorSimulatorService);
+  private http           = inject(HttpClient);
+  private router         = inject(Router);
+  private route          = inject(ActivatedRoute);
+  private destroy$       = new Subject<void>();
 
   machines = signal<Machine[]>([]);
   sensorMap = signal<Record<string, SensorData>>({});
@@ -319,24 +321,19 @@ export class ScadaDashboardComponent implements OnInit, OnDestroy {
   }
 
   private startSensorPolling(): void {
-    // Carica tutti i sensori ogni 5 secondi e aggiorna la mappa machineId→SensorData
     interval(5000).pipe(
       startWith(0),
       takeUntil(this.destroy$),
-      switchMap(() => this.http.get<SensorData[]>(API_ENDPOINTS.sensors))
+      switchMap(() => this.http.get<SensorData[]>(API_ENDPOINTS.sensors)),
     ).subscribe({
       next: (sensors) => {
+        const machineIndex = new Map(this.machines().map((m) => [m.id, m]));
         const map: Record<string, SensorData> = {};
         sensors.forEach((s) => {
-          // Simula variazione realistica dei valori ad ogni polling
-          map[s.machineId] = {
-            ...s,
-            temperature: +(s.temperature + (Math.random() - 0.5) * 2).toFixed(1),
-            pressure: +(s.pressure + (Math.random() - 0.5) * 0.2).toFixed(2),
-            rpm: Math.round(s.rpm + (Math.random() - 0.5) * 50),
-            vibration: +(s.vibration + (Math.random() - 0.5) * 0.3).toFixed(2),
-            timestamp: new Date().toISOString(),
-          };
+          const machine = machineIndex.get(s.machineId);
+          // Se la macchina non è ancora in stato noto, skip (polling macchine non ancora completato)
+          if (!machine) return;
+          map[s.machineId] = this.simulator.simulate(s, machine.status);
         });
         this.sensorMap.set(map);
       },

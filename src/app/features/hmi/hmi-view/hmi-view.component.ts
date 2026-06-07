@@ -329,8 +329,10 @@ export class HmiViewComponent implements OnInit, OnDestroy {
   }
 
   private startSensorPolling(machineId: string): void {
-    this.machineService.pollSensorData(machineId).pipe(
-      takeUntil(this.destroy$)
+    // Passa il callback di stato: il simulatore usa lo stato attuale della macchina
+    // per azzerare i sensori se stopped/maintenance
+    this.machineService.pollSensorData(machineId, () => this.machine()?.status ?? 'stopped').pipe(
+      takeUntil(this.destroy$),
     ).subscribe({
       next: (sensor) => {
         this.sensorData.set(sensor);

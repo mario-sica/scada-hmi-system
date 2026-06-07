@@ -4,22 +4,22 @@
 @use 'variables' as *;
 @use 'components' as *;
 
-// CSS layer declaration — dichiara 'primeng' con priorità bassa rispetto ai nostri stili
-// PrimeNG inietta i suoi stili nel layer 'primeng'; i nostri (fuori dal layer) lo sovrascrivono
-@layer primeng;
+// Ordine dei layer: base (reset) → primeng (componenti UI) → regole non-layered (nostri override)
+// Il CSS reset è in @layer base così NON azzera il padding di PrimeNG che sta in @layer primeng
+@layer base, primeng;
 
-// Reset base
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 html {
   height: 100%;
-  // Fallback hardcoded: evita sfondo bianco prima che Angular applichi data-theme
   background-color: #0d1117;
 }
 
@@ -34,14 +34,12 @@ body {
   transition: $theme-transition;
 }
 
-// Layout root
 app-root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-// Utility classes
 .sr-only {
   position: absolute;
   width: 1px;

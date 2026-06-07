@@ -9,14 +9,14 @@
     {
       "id": "M2",
       "name": "Pressa Idraulica B",
-      "status": "stopped",
-      "lastUpdate": "2025-01-01T10:00:00Z"
+      "status": "running",
+      "lastUpdate": "2026-06-07T22:54:13.052Z"
     },
     {
       "id": "M3",
       "name": "Nastro Trasportatore C",
-      "status": "running",
-      "lastUpdate": "2026-06-07T22:40:18.526Z"
+      "status": "stopped",
+      "lastUpdate": "2026-06-07T23:08:01.743Z"
     },
     {
       "id": "M4",
@@ -103,6 +103,34 @@
       "operatorId": "OPERATOR_DEFAULT",
       "timestamp": "2026-06-07T22:40:18.526Z",
       "id": "KznCja59AFY"
+    },
+    {
+      "machineId": "M2",
+      "command": "START",
+      "operatorId": "OPERATOR_DEFAULT",
+      "timestamp": "2026-06-07T22:54:13.052Z",
+      "id": "E0ueO47-cxU"
+    },
+    {
+      "machineId": "M3",
+      "command": "EMERGENCY_STOP",
+      "operatorId": "OPERATOR_DEFAULT",
+      "timestamp": "2026-06-07T23:06:51.405Z",
+      "id": "CMbZ7BKGizY"
+    },
+    {
+      "machineId": "M3",
+      "command": "EMERGENCY_STOP",
+      "operatorId": "OPERATOR_DEFAULT",
+      "timestamp": "2026-06-07T23:07:01.125Z",
+      "id": "bFA7q3V0NEI"
+    },
+    {
+      "machineId": "M3",
+      "command": "EMERGENCY_STOP",
+      "operatorId": "OPERATOR_DEFAULT",
+      "timestamp": "2026-06-07T23:08:01.743Z",
+      "id": "8ozlQQWvxJI"
     }
   ],
   "userPreferences": [

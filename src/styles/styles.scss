@@ -1,10 +1,12 @@
-// Entry point SCSS — importa tutto nell'ordine corretto
+// @use DEVE essere il primo statement SCSS — nessun'altra regola prima
 @use 'themes/dark' as *;
 @use 'themes/light' as *;
 @use 'variables' as *;
-@use 'typography' as *;
 @use 'components' as *;
 
+// CSS layer declaration — dichiara 'primeng' con priorità bassa rispetto ai nostri stili
+// PrimeNG inietta i suoi stili nel layer 'primeng'; i nostri (fuori dal layer) lo sovrascrivono
+@layer primeng;
 
 // Reset base
 *,
@@ -17,13 +19,16 @@
 
 html {
   height: 100%;
-  // Il tema dark è applicato via ThemeService sull'elemento html
-  // Default applicato qui per evitare FOUC prima del bootstrap Angular
+  // Fallback hardcoded: evita sfondo bianco prima che Angular applichi data-theme
   background-color: #0d1117;
 }
 
 body {
   height: 100%;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
   background-color: var(--color-bg-base);
   color: var(--color-text-primary);
   transition: $theme-transition;
@@ -49,26 +54,27 @@ app-root {
   border: 0;
 }
 
-.flex {
-  display: flex;
+.value-numeric {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
-.flex-col {
-  flex-direction: column;
+.value-numeric-sm {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+  font-weight: 400;
 }
 
-.items-center {
-  align-items: center;
+.label-unit {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-.gap-sm {
-  gap: $space-sm;
-}
-
-.gap-md {
-  gap: $space-md;
-}
-
-.gap-lg {
-  gap: $space-lg;
-}
+.gap-sm { gap: $space-sm; }
+.gap-md { gap: $space-md; }
+.gap-lg { gap: $space-lg; }

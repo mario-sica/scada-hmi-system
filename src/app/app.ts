@@ -35,7 +35,7 @@ import { ThemeService } from './core/services/theme.service';
           [pTooltip]="themeToggleTooltip()"
           tooltipPosition="bottom"
         >
-          @if (themeService.isDark()()) {
+          @if (themeService.isDark()) {
             <i class="pi pi-sun" aria-hidden="true"></i>
           } @else {
             <i class="pi pi-moon" aria-hidden="true"></i>
@@ -140,15 +140,11 @@ export class App implements OnInit {
   protected themeService = inject(ThemeService);
 
   themeToggleAriaLabel = computed(() =>
-    this.themeService.isDark()()
-      ? 'Passa a tema chiaro'
-      : 'Passa a tema scuro'
+    this.themeService.isDark() ? 'Passa a tema chiaro' : 'Passa a tema scuro'
   );
 
   themeToggleTooltip = computed(() =>
-    this.themeService.isDark()()
-      ? 'Passa a tema chiaro'
-      : 'Passa a tema scuro'
+    this.themeService.isDark() ? 'Passa a tema chiaro' : 'Passa a tema scuro'
   );
 
   ngOnInit(): void {

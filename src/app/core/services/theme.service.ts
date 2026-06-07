@@ -19,7 +19,7 @@
  *              applica il tema prima del primo render (niente flash of wrong theme).
  */
 
-import { Injectable, signal, Signal, DOCUMENT, inject } from '@angular/core';
+import { Injectable, signal, DOCUMENT, inject } from '@angular/core';
 
 export type AppTheme = 'dark' | 'light';
 
@@ -31,30 +31,22 @@ export class ThemeService {
   private document = inject(DOCUMENT);
   private _isDark = signal<boolean>(true);
 
+  /** Signal pubblico in sola lettura — usare direttamente nel template come `themeService.isDark()` */
+  readonly isDark = this._isDark.asReadonly();
+
   constructor() {
     const saved = localStorage.getItem(STORAGE_KEY) as AppTheme | null;
     this.applyTheme(saved ?? DEFAULT_THEME);
   }
 
-  /** @returns Il tema attualmente attivo */
   getCurrentTheme(): AppTheme {
     return this._isDark() ? 'dark' : 'light';
   }
 
-  /** Signal reattivo per il binding nei template Angular */
-  isDark(): Signal<boolean> {
-    return this._isDark.asReadonly();
-  }
-
-  /** Alterna tra dark e light theme */
   toggleTheme(): void {
     this.setTheme(this._isDark() ? 'light' : 'dark');
   }
 
-  /**
-   * Applica il tema specificato immediatamente.
-   * @param theme - 'dark' | 'light'
-   */
   setTheme(theme: AppTheme): void {
     this.applyTheme(theme);
     localStorage.setItem(STORAGE_KEY, theme);

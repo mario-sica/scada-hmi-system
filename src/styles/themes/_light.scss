@@ -1,58 +1,45 @@
-// Tema chiaro — per sale di controllo illuminate o uso diurno
-// Alto contrasto, ottimizzato per leggibilità in ambienti luminosi
+// Tema chiaro — token CSS per i nostri componenti custom (non PrimeNG)
+// I colori PrimeNG sono gestiti tramite definePreset in app.config.ts
 [data-theme="light"] {
-  // Sfondi
-  --color-bg-base: #ffffff;
-  --color-bg-surface: #f6f8fa;
+  // Sfondi applicazione
+  --color-bg-base:     #ffffff;
+  --color-bg-surface:  #f6f8fa;
   --color-bg-elevated: #ffffff;
-  --color-bg-overlay: #eaeef2;
+  --color-bg-overlay:  #eaeef2;
 
   // Testi
-  --color-text-primary: #1f2328;
+  --color-text-primary:   #1f2328;
   --color-text-secondary: #636c76;
-  --color-text-disabled: #afb8c1;
-  --color-text-inverse: #ffffff;
+  --color-text-disabled:  #afb8c1;
+  --color-text-inverse:   #ffffff;
 
   // Bordi
-  --color-border: #d0d7de;
+  --color-border:       #d0d7de;
   --color-border-focus: #0969da;
 
-  // Stato macchine (stessi valori semantici del dark, aggiustati per contrasto WCAG AA)
-  --color-status-running: #1a7f37;
-  --color-status-stopped: #57606a;
-  --color-status-fault: #cf222e;
+  // Stato macchine
+  --color-status-running:     #1a7f37;
+  --color-status-stopped:     #57606a;
+  --color-status-fault:       #cf222e;
   --color-status-maintenance: #9a6700;
 
   // Allarmi
   --color-alarm-critical: #cf222e;
-  --color-alarm-warning: #9a6700;
-  --color-alarm-info: #0969da;
+  --color-alarm-warning:  #9a6700;
+  --color-alarm-info:     #0969da;
 
   // Comandi
-  --color-cmd-start: #1a7f37;
-  --color-cmd-stop: #9a6700;
-  --color-cmd-reset: #0969da;
+  --color-cmd-start:     #1a7f37;
+  --color-cmd-stop:      #9a6700;
+  --color-cmd-reset:     #0969da;
   --color-cmd-emergency: #cf222e;
 
-  // Sensori — soglie
-  --color-sensor-normal: #1a7f37;
-  --color-sensor-warning: #9a6700;
+  // Sensori
+  --color-sensor-normal:   #1a7f37;
+  --color-sensor-warning:  #9a6700;
   --color-sensor-critical: #cf222e;
 
-  // Indicatore connessione
-  --color-connection-ok: #1a7f37;
+  // Connessione API
+  --color-connection-ok:   #1a7f37;
   --color-connection-lost: #cf222e;
-
-  // PrimeNG design token overrides
-  --p-surface-ground: #f6f8fa;
-  --p-surface-section: #ffffff;
-  --p-surface-card: #ffffff;
-  --p-surface-overlay: #ffffff;
-  --p-surface-border: #d0d7de;
-  --p-text-color: #1f2328;
-  --p-text-secondary-color: #636c76;
-  --p-primary-color: #0969da;
-  --p-primary-contrast-color: #ffffff;
-  --p-content-border-color: #d0d7de;
-  --p-content-hover-background: #eaeef2;
 }

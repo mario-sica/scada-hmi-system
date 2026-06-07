@@ -1,158 +1,58 @@
-// Override PrimeNG — nessun !important necessario perché PrimeNG usa @layer primeng
-// Le nostre regole fuori dal layer hanno automaticamente priorità superiore
+// Override PrimeNG — complementa Aura senza sovrascrivere struttura (padding, border-radius, shadow)
+// Aura gestisce struttura; qui gestiamo solo touch-friendliness e font industriali.
+// Nessun padding override: il padding 0 era il bug principale. Lasciamo i token Aura.
 
-// Card
-.p-card {
-  background: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
-  color: var(--color-text-primary);
-
-  .p-card-title {
-    color: var(--color-text-primary);
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  .p-card-content {
-    padding: 0;
-  }
-}
-
-// Button base — touch-friendly (48px minimo)
+// ─── Button ──────────────────────────────────────────────────────────────────
+// Touch-friendly: min 48px. Non sovrascriviamo padding (viene da Aura via --p-button-padding-*)
 .p-button {
   min-height: 48px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 14px;
   font-family: 'Inter', sans-serif;
-  transition: opacity 150ms ease, transform 100ms ease;
-
-  &:not(:disabled):active {
-    transform: translateY(1px);
-  }
+  font-weight: 600;
 }
 
-// Dialog
-.p-dialog {
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-
-  .p-dialog-header {
-    background: var(--color-bg-elevated);
-    color: var(--color-text-primary);
-    border-bottom: 1px solid var(--color-border);
-    padding: 16px 20px;
-    font-size: 15px;
-    font-weight: 600;
-  }
-
-  .p-dialog-content {
-    background: var(--color-bg-elevated);
-    color: var(--color-text-primary);
-    padding: 20px;
-  }
-
-  .p-dialog-footer {
-    background: var(--color-bg-elevated);
-    border-top: 1px solid var(--color-border);
-    padding: 12px 20px;
-    display: flex;
-    gap: 8px;
-    justify-content: flex-end;
-  }
-}
-
-// ConfirmDialog
-.p-confirmdialog .p-dialog-content {
-  background: var(--color-bg-elevated);
-  color: var(--color-text-primary);
-
-  .p-confirmdialog-message {
-    font-size: 15px;
-    line-height: 1.6;
-    color: var(--color-text-primary);
-  }
-}
-
-// Table
-.p-datatable {
-  background: var(--color-bg-surface);
-
-  .p-datatable-header {
-    background: var(--color-bg-surface);
-    border-color: var(--color-border);
-  }
-
-  .p-datatable-thead > tr > th {
-    background: var(--color-bg-elevated);
-    color: var(--color-text-secondary);
-    border-color: var(--color-border);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 10px 12px;
-  }
-
-  .p-datatable-tbody > tr {
-    background: var(--color-bg-surface);
-    color: var(--color-text-primary);
-
-    > td {
-      border-color: var(--color-border);
-      padding: 10px 12px;
-      background: inherit;
-    }
-
-    &:hover > td {
-      background: var(--color-bg-overlay);
-    }
-  }
-}
-
-// Toast
-.p-toast {
-  .p-toast-message {
-    background: var(--color-bg-elevated);
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    color: var(--color-text-primary);
-  }
-}
-
-// InputText — touch-friendly
+// ─── InputText ───────────────────────────────────────────────────────────────
+// Aumenta la dimensione del font a 16px per leggibilità su touch screen
 .p-inputtext {
   min-height: 48px;
   font-size: 16px;
-  background: var(--color-bg-elevated);
-  border-color: var(--color-border);
-  color: var(--color-text-primary);
-  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+}
+
+// ─── Card ────────────────────────────────────────────────────────────────────
+// Aura gestisce background, border-radius, padding via token.
+// Qui aggiungiamo solo il font industriale.
+.p-card {
+  font-family: 'Inter', sans-serif;
+}
+
+// ─── DataTable ───────────────────────────────────────────────────────────────
+// Testo header in maiuscolo + lettering per tabella allarmi
+.p-datatable {
+  .p-datatable-thead > tr > th {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+}
+
+// ─── Dialog ──────────────────────────────────────────────────────────────────
+// Font industriale nei dialog
+.p-dialog {
   font-family: 'Inter', sans-serif;
 
-  &:enabled:focus {
-    border-color: var(--color-border-focus);
-    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-border-focus) 25%, transparent);
-  }
-
-  &::placeholder {
-    color: var(--color-text-disabled);
+  .p-dialog-title {
+    font-weight: 600;
   }
 }
 
-// Tooltip
-.p-tooltip {
-  .p-tooltip-text {
-    background: var(--color-bg-elevated);
-    color: var(--color-text-primary);
-    border: 1px solid var(--color-border);
-    font-size: 13px;
-    border-radius: 4px;
-  }
+// ─── Toast ───────────────────────────────────────────────────────────────────
+.p-toast {
+  font-family: 'Inter', sans-serif;
 }
 
-// Overlay/backdrop per i dialog
-.p-overlay-mask {
-  background: rgba(0, 0, 0, 0.6);
+// ─── Tooltip ─────────────────────────────────────────────────────────────────
+.p-tooltip .p-tooltip-text {
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
 }

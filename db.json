@@ -4,19 +4,19 @@
       "id": "M1",
       "name": "Linea Imbottigliamento A",
       "status": "running",
-      "lastUpdate": "2025-01-01T10:00:00Z"
+      "lastUpdate": "2026-06-07T23:17:52.697Z"
     },
     {
       "id": "M2",
       "name": "Pressa Idraulica B",
-      "status": "running",
-      "lastUpdate": "2026-06-07T22:54:13.052Z"
+      "status": "stopped",
+      "lastUpdate": "2025-01-01T10:00:00Z"
     },
     {
       "id": "M3",
       "name": "Nastro Trasportatore C",
-      "status": "stopped",
-      "lastUpdate": "2026-06-07T23:08:01.743Z"
+      "status": "fault",
+      "lastUpdate": "2025-01-01T10:00:00Z"
     },
     {
       "id": "M4",
@@ -38,7 +38,7 @@
     {
       "id": "s2",
       "machineId": "M2",
-      "temperature": 45.1,
+      "temperature": 22,
       "pressure": 0,
       "rpm": 0,
       "vibration": 0,
@@ -131,6 +131,41 @@
       "operatorId": "OPERATOR_DEFAULT",
       "timestamp": "2026-06-07T23:08:01.743Z",
       "id": "8ozlQQWvxJI"
+    },
+    {
+      "machineId": "M1",
+      "command": "STOP",
+      "operatorId": "OPERATOR_DEFAULT",
+      "timestamp": "2026-06-07T23:17:09.488Z",
+      "id": "u2ASUBaEUQs"
+    },
+    {
+      "machineId": "M1",
+      "command": "START",
+      "operatorId": "OPERATOR_DEFAULT",
+      "timestamp": "2026-06-07T23:17:52.697Z",
+      "id": "1FTOFNMgXW0"
+    },
+    {
+      "machineId": "M3",
+      "command": "START",
+      "operatorId": "OPERATOR_DEFAULT",
+      "timestamp": "2026-06-07T23:19:41.639Z",
+      "id": "kW_n6TIWq-g"
+    },
+    {
+      "machineId": "M3",
+      "command": "EMERGENCY_STOP",
+      "operatorId": "OPERATOR_DEFAULT",
+      "timestamp": "2026-06-07T23:19:50.361Z",
+      "id": "Q4fATNEo4VU"
+    },
+    {
+      "machineId": "M3",
+      "command": "START",
+      "operatorId": "OPERATOR_DEFAULT",
+      "timestamp": "2026-06-07T23:20:12.262Z",
+      "id": "DKlJNoKpj-8"
     }
   ],
   "userPreferences": [

@@ -1,18 +1,12 @@
 /**
  * @file command.service.ts
  * @description Invio comandi di controllo alle macchine tramite REST API.
- *              Simula la comunicazione verso il PLC via REST endpoint.
  *
- * @production-note
- * In un sistema reale i comandi verrebbero inviati tramite:
- * - OPC-UA Method Call
- * - Modbus Write Register
- * - MQTT publish su topic dedicato
- * Qui usiamo PATCH su /machines/:id + POST su /commands per l'audit trail.
+ * Aggiorna i valori sensore nel db in base al comando:
+ *  - START             → ripristina i valori nominali operativi della macchina
+ *  - STOP/RESET/ESTOP  → azzera i sensori (macchina ferma = temperatura ambiente, tutto a 0)
  *
- * RESET/STOP/EMERGENCY_STOP: resettano anche i valori sensore nel db ai valori
- * nominali (temperatura ambiente, rpm=0, pressione=0, vibrazione=0).
- * In un sistema reale questo avverrebbe lato PLC alla ricezione del comando.
+ * In un sistema reale questo avverrebbe lato PLC/DCS alla ricezione del comando.
  */
 
 import { Injectable, inject } from '@angular/core';
@@ -30,29 +24,27 @@ const COMMAND_STATUS_MAP: Record<CommandType, MachineStatus> = {
   EMERGENCY_STOP: 'stopped',
 };
 
-/** Comandi che mettono la macchina in uno stato fermo → azzerano i sensori nel db */
-const STOP_COMMANDS = new Set<CommandType>(['STOP', 'RESET', 'EMERGENCY_STOP']);
+const STOP_COMMANDS  = new Set<CommandType>(['STOP', 'RESET', 'EMERGENCY_STOP']);
+const START_COMMANDS = new Set<CommandType>(['START']);
 
-/** Valori sensore nominali per una macchina in stato fermo */
-const SENSOR_STOPPED: Partial<SensorData> = {
-  temperature: 22,   // temperatura ambiente
-  pressure:    0,
-  rpm:         0,
-  vibration:   0,
+/** Valori sensore di macchina ferma (temperatura ambiente, tutto a 0) */
+const SENSOR_STOPPED: Partial<SensorData> = { temperature: 22, pressure: 0, rpm: 0, vibration: 0 };
+
+/**
+ * Valori nominali operativi per macchina (seed per la simulazione).
+ * In produzione verrebbero recuperati dalla storica del processo o da un namespace OPC-UA.
+ */
+const SENSOR_NOMINAL: Record<string, Partial<SensorData>> = {
+  M1: { temperature: 72, pressure: 4.2, rpm: 1450, vibration: 0.8 },
+  M2: { temperature: 55, pressure: 3.5, rpm: 980,  vibration: 0.6 },
+  M3: { temperature: 85, pressure: 5.0, rpm: 890,  vibration: 1.2 },
+  M4: { temperature: 55, pressure: 2.5, rpm: 620,  vibration: 1.1 },
 };
 
 @Injectable({ providedIn: 'root' })
 export class CommandService {
   private http = inject(HttpClient);
 
-  /**
-   * Invia un comando di controllo alla macchina.
-   * Per i comandi STOP/RESET/EMERGENCY_STOP aggiorna anche i valori sensore
-   * nel db ai valori nominali di macchina ferma.
-   *
-   * @param command - Il comando da inviare
-   * @returns Observable<void> che completa quando tutte le operazioni sono riuscite
-   */
   sendCommand(command: ControlCommand): Observable<void> {
     const timestamped: ControlCommand = { ...command, timestamp: new Date().toISOString() };
     const newStatus = COMMAND_STATUS_MAP[command.command];
@@ -62,22 +54,30 @@ export class CommandService {
       { status: newStatus, lastUpdate: new Date().toISOString() },
     );
 
-    // Se il comando ferma la macchina, resetta anche i sensori nel db
-    const updateSensors$ = STOP_COMMANDS.has(command.command)
-      ? this.http.get<SensorData[]>(API_ENDPOINTS.sensorByMachine(command.machineId)).pipe(
-          switchMap((sensors) => {
-            if (!sensors.length) return of(null);
-            return this.http.patch<SensorData>(
-              `${API_ENDPOINTS.sensors}/${sensors[0].id}`,
-              { ...SENSOR_STOPPED, timestamp: new Date().toISOString() },
-            );
-          }),
-        )
-      : of(null);
+    const updateSensors$ = this.buildSensorUpdate(command);
 
     return forkJoin([updateMachine$, updateSensors$]).pipe(
       switchMap(() => this.http.post<ControlCommand>(API_ENDPOINTS.commands, timestamped)),
       switchMap(() => of(undefined as void)),
+    );
+  }
+
+  private buildSensorUpdate(command: ControlCommand): Observable<SensorData | null> {
+    const shouldUpdate = STOP_COMMANDS.has(command.command) || START_COMMANDS.has(command.command);
+    if (!shouldUpdate) return of(null);
+
+    const values = STOP_COMMANDS.has(command.command)
+      ? SENSOR_STOPPED
+      : (SENSOR_NOMINAL[command.machineId] ?? SENSOR_STOPPED);
+
+    return this.http.get<SensorData[]>(API_ENDPOINTS.sensorByMachine(command.machineId)).pipe(
+      switchMap((sensors) => {
+        if (!sensors.length) return of(null);
+        return this.http.patch<SensorData>(
+          `${API_ENDPOINTS.sensors}/${sensors[0].id}`,
+          { ...values, timestamp: new Date().toISOString() },
+        );
+      }),
     );
   }
 }

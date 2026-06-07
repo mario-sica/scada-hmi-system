@@ -1,55 +1,58 @@
-// Override PrimeNG — complementa Aura senza sovrascrivere struttura (padding, border-radius, shadow)
-// Aura gestisce struttura; qui gestiamo solo touch-friendliness e font industriali.
-// Nessun padding override: il padding 0 era il bug principale. Lasciamo i token Aura.
+// Override PrimeNG — regole non-layered (priorità massima nella cascade).
+// Usiamo gli stessi CSS custom property del preset Aura: se il token cambia,
+// il valore si aggiorna automaticamente. Non sovrascriviamo valori hardcoded.
+
+// ─── Dialog ──────────────────────────────────────────────────────────────────
+// Padding esplicito per garantire che non venga azzerato da nessun reset CSS.
+// Usa gli stessi token che Aura definisce via definePreset.
+.p-dialog-header {
+  padding: var(--p-overlay-modal-padding);
+  font-family: 'Inter', sans-serif;
+}
+
+.p-dialog-content {
+  padding: 0 var(--p-overlay-modal-padding) var(--p-overlay-modal-padding) var(--p-overlay-modal-padding);
+  font-family: 'Inter', sans-serif;
+}
+
+.p-dialog-footer {
+  padding: 0 var(--p-overlay-modal-padding) var(--p-overlay-modal-padding) var(--p-overlay-modal-padding);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
 
 // ─── Button ──────────────────────────────────────────────────────────────────
-// Touch-friendly: min 48px. Non sovrascriviamo padding (viene da Aura via --p-button-padding-*)
 .p-button {
   min-height: 48px;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
+  // Padding mantenuto dai token Aura (--p-button-padding-x / --p-button-padding-y)
 }
 
 // ─── InputText ───────────────────────────────────────────────────────────────
-// Aumenta la dimensione del font a 16px per leggibilità su touch screen
 .p-inputtext {
   min-height: 48px;
   font-size: 16px;
   font-family: 'Inter', sans-serif;
+  padding: var(--p-form-field-padding-y) var(--p-form-field-padding-x);
 }
 
 // ─── Card ────────────────────────────────────────────────────────────────────
-// Aura gestisce background, border-radius, padding via token.
-// Qui aggiungiamo solo il font industriale.
 .p-card {
   font-family: 'Inter', sans-serif;
 }
 
 // ─── DataTable ───────────────────────────────────────────────────────────────
-// Testo header in maiuscolo + lettering per tabella allarmi
-.p-datatable {
-  .p-datatable-thead > tr > th {
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 600;
-  }
-}
-
-// ─── Dialog ──────────────────────────────────────────────────────────────────
-// Font industriale nei dialog
-.p-dialog {
-  font-family: 'Inter', sans-serif;
-
-  .p-dialog-title {
-    font-weight: 600;
-  }
+.p-datatable .p-datatable-thead > tr > th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
 }
 
 // ─── Toast ───────────────────────────────────────────────────────────────────
-.p-toast {
-  font-family: 'Inter', sans-serif;
-}
+.p-toast { font-family: 'Inter', sans-serif; }
 
 // ─── Tooltip ─────────────────────────────────────────────────────────────────
 .p-tooltip .p-tooltip-text {

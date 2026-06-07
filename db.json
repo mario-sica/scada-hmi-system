@@ -1,0 +1,23 @@
+{
+  "machines": [
+    { "id": "M1", "name": "Linea Imbottigliamento A", "status": "running", "lastUpdate": "2025-01-01T10:00:00Z" },
+    { "id": "M2", "name": "Pressa Idraulica B", "status": "stopped", "lastUpdate": "2025-01-01T10:00:00Z" },
+    { "id": "M3", "name": "Nastro Trasportatore C", "status": "fault", "lastUpdate": "2025-01-01T10:00:00Z" },
+    { "id": "M4", "name": "Robot Saldatura D", "status": "maintenance", "lastUpdate": "2025-01-01T10:00:00Z" }
+  ],
+  "sensors": [
+    { "id": "s1", "machineId": "M1", "temperature": 72.4, "pressure": 4.2, "rpm": 1450, "vibration": 0.8, "timestamp": "2025-01-01T10:00:00Z" },
+    { "id": "s2", "machineId": "M2", "temperature": 45.1, "pressure": 0.0, "rpm": 0, "vibration": 0.0, "timestamp": "2025-01-01T10:00:00Z" },
+    { "id": "s3", "machineId": "M3", "temperature": 98.7, "pressure": 6.1, "rpm": 890, "vibration": 3.2, "timestamp": "2025-01-01T10:00:00Z" },
+    { "id": "s4", "machineId": "M4", "temperature": 55.0, "pressure": 2.5, "rpm": 620, "vibration": 1.1, "timestamp": "2025-01-01T10:00:00Z" }
+  ],
+  "alarms": [
+    { "id": "a1", "machineId": "M3", "message": "Temperatura superiore soglia (98.7°C > 95°C)", "severity": "critical", "timestamp": "2025-01-01T09:55:00Z", "acknowledged": false },
+    { "id": "a2", "machineId": "M3", "message": "Vibrazione anomala rilevata (3.2 mm/s)", "severity": "warning", "timestamp": "2025-01-01T09:58:00Z", "acknowledged": false },
+    { "id": "a3", "machineId": "M1", "message": "Cambio filtro consigliato entro 8h", "severity": "info", "timestamp": "2025-01-01T08:00:00Z", "acknowledged": true }
+  ],
+  "commands": [],
+  "userPreferences": [
+    { "id": "default", "theme": "dark" }
+  ]
+}

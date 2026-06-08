@@ -34,9 +34,9 @@ import { CommandService } from '../../../core/services/command.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Machine } from '../../../core/models/machine.model';
 import { SensorData } from '../../../core/models/sensor-data.model';
-import { Alarm } from '../../../core/models/alarm.model';
+import { Alarm, AlarmSeverity } from '../../../core/models/alarm.model';
 import { CommandType, ControlCommand } from '../../../core/models/control-command.model';
-import { getSensorThresholdLevel } from '../../../core/constants/thresholds';
+import { getSensorThresholdLevel, SENSOR_THRESHOLDS } from '../../../core/constants/thresholds';
 
 import { StatusBadgeComponent } from '../../../shared/components/status-badge/status-badge.component';
 import { SensorPanelComponent } from '../sensor-panel/sensor-panel.component';
@@ -294,6 +294,9 @@ export class HmiViewComponent implements OnInit, OnDestroy {
   apiOnline = signal<boolean>(true);
   backConfirmVisible = signal<boolean>(false);
 
+  /** Tiene traccia dei sensori con allarme attivo per evitare duplicati ogni polling */
+  private activeAlarmKeys = new Set<string>();
+
   lastUpdateLabel = computed(() => {
     const m = this.machine();
     if (!m) return '';
@@ -353,26 +356,59 @@ export class HmiViewComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Controlla se i valori sensore superano le soglie critical e crea allarmi automatici.
-   * Nota: in produzione questa logica sarebbe nel PLC/DCS, non nel frontend.
-   */
   private checkThresholdAlarms(sensor: SensorData): void {
     const checks: Array<{ key: 'temperature' | 'pressure' | 'rpm' | 'vibration'; label: string; unit: string }> = [
-      { key: 'temperature', label: 'Temperatura', unit: '°C' },
-      { key: 'pressure', label: 'Pressione', unit: 'bar' },
-      { key: 'rpm', label: 'Velocità', unit: 'rpm' },
-      { key: 'vibration', label: 'Vibrazione', unit: 'mm/s' },
+      { key: 'temperature', label: 'Temperatura', unit: '°C'   },
+      { key: 'pressure',    label: 'Pressione',   unit: 'bar'  },
+      { key: 'rpm',         label: 'Velocità',    unit: 'rpm'  },
+      { key: 'vibration',   label: 'Vibrazione',  unit: 'mm/s' },
     ];
 
+    const machineId = this.machineId();
+
     checks.forEach(({ key, label, unit }) => {
-      if (getSensorThresholdLevel(key, sensor[key]) === 'critical') {
-        // Mostra un toast senza creare duplicati nel db (il polling creerà già allarmi)
-        this.messageService.add({
-          severity: 'error',
-          summary: `${label} CRITICA`,
-          detail: `${sensor[key]} ${unit} — soglia superata`,
-          life: 8000,
+      const level    = getSensorThresholdLevel(key, sensor[key]);
+      const alarmKey = `${machineId}-${key}`;
+
+      if (level === 'normal') {
+        // Condizione rientrata: rimuove dal set così la prossima anomalia crea un nuovo allarme
+        this.activeAlarmKeys.delete(alarmKey);
+        return;
+      }
+
+      // Allarme già attivo per questo sensore — non duplicare
+      if (this.activeAlarmKeys.has(alarmKey)) return;
+      this.activeAlarmKeys.add(alarmKey);
+
+      const threshold = SENSOR_THRESHOLDS[key][level];
+      const severity: AlarmSeverity = level === 'critical' ? 'critical' : 'warning';
+
+      this.alarmService.createAlarm({
+        machineId,
+        message:      `${label} in zona ${level} (${sensor[key]} ${unit} > ${threshold} ${unit})`,
+        severity,
+        timestamp:    new Date().toISOString(),
+        acknowledged: false,
+      }).pipe(takeUntil(this.destroy$)).subscribe({
+        next: (created) => {
+          this.alarms.update((list) => [created, ...list]);
+          this.messageService.add({
+            severity: level === 'critical' ? 'error' : 'warn',
+            summary:  `${label} ${level === 'critical' ? 'CRITICA' : 'WARNING'}`,
+            detail:   `${sensor[key]} ${unit} — allarme registrato`,
+            life:     6000,
+          });
+        },
+        error: () => {},
+      });
+
+      // Soglia critical + macchina in marcia → porta in fault
+      if (level === 'critical' && this.machine()?.status === 'running') {
+        this.machineService.updateMachineStatus(machineId, 'fault').pipe(
+          takeUntil(this.destroy$),
+        ).subscribe({
+          next: (m) => this.machine.set(m),
+          error: () => {},
         });
       }
     });
